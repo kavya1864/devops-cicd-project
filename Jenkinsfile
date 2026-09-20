@@ -11,15 +11,18 @@ pipeline {
 
         stage('Docker Build') {
             steps {
+                echo 'Building Docker image...'
                 sh 'docker build -t devops-demo-app:latest .'
             }
         }
 
         stage('Deploy') {
             steps {
+                echo 'Deploying application...'
                 sh '''
                     docker stop devops-demo || true
                     docker rm devops-demo || true
+
                     docker run -d \
                         --name devops-demo \
                         -p 5000:5000 \
