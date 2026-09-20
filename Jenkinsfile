@@ -30,5 +30,12 @@ pipeline {
                 '''
             }
         }
+        
+stage('Test') {
+    steps {
+        echo 'Testing deployed application...'
+        sh 'curl -f http://localhost:5000/'
+    }
+}
     }
 }
