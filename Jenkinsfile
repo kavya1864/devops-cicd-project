@@ -5,17 +5,24 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                echo 'Jenkins has started the pipeline!'
+                echo 'Checking out source code...'
                 checkout scm
             }
         }
 
         stage('Build') {
             steps {
-                echo 'Building the Flask application...'
+                echo 'Checking Python and pip...'
                 sh 'python3 --version'
                 sh 'pip3 --version'
                 sh 'pip3 install -r requirements.txt'
+            }
+        }
+
+        stage('Docker Build') {
+            steps {
+                echo 'Building Docker image...'
+                sh 'docker build -t devops-demo-app:latest .'
             }
         }
     }
